@@ -15,3 +15,7 @@ run executable
 ```
 Game
 ```
+
+
+### Devlog Progress 
+- 20/11/2025 : Started the project, displaying a single blank window
