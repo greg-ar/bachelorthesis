@@ -243,21 +243,24 @@ void processInput(GLFWwindow *window)
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
 
-    // process joystick
-    int count;
-    const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
-    //std::cout<<"DEBUG::count is"<<count<<"axes is"<<axes<<std::endl;
-    if (count)
+    // process gamepad
+    GLFWgamepadstate state;
+    if (glfwGetGamepadState(GLFW_JOYSTICK_1, &state))
     {
-        if (axes[0] >= 0.8f)
-            camera.ProcessKeyboard(RIGHT,deltaTime);
-        if (axes[0] <=-0.8f)
-            camera.ProcessKeyboard(LEFT,deltaTime);
-        if (axes[1] >= 0.8f)
-            camera.ProcessKeyboard(BACKWARD,deltaTime);
-        if (axes[1] <=-0.8f)
-            camera.ProcessKeyboard(FORWARD,deltaTime);
-    }
+       if (state.buttons[GLFW_GAMEPAD_BUTTON_A])
+       {
+           std::cout<<"Jump Pressed!"<<std::endl;
+       }
+       if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+           camera.ProcessKeyboard(FORWARD, deltaTime);
+       if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+           camera.ProcessKeyboard(BACKWARD, deltaTime);
+       if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+           camera.ProcessKeyboard(LEFT, deltaTime);
+       if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+           camera.ProcessKeyboard(RIGHT, deltaTime);
+
+   }
 }
 
 
